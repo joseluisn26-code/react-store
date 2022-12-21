@@ -1,0 +1,12 @@
+.cart-widget {
+    color: white;
+    font-size: 20px;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cart-widget:hover {
+    font-size: 24px;
+}
+
