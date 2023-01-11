@@ -2,6 +2,7 @@ import './Navbar.css'
 import CartWidget from '../CartWidget/CartWidget';
 
 import { FaStore } from "react-icons/fa";
+import { Link } from 'react-router-dom'
 
 
 
@@ -18,20 +19,27 @@ export const Navbar = () => {
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarsExample07">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Ofertas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">nosotros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Testimonios</a>
-                            </li>
 
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <Link class="nav-link active" to="/">Home</Link>
+                            </li>
+                            
+                             <li className="nav-item">
+                                <Link class="nav-link" to="/productos/Tenis">Tenis</Link>
+                            </li>
+                            
+                            <li className="nav-item">
+                                <Link class="nav-link" to="/productos/Guayos">Guayos</Link>
+                            </li>
+                            
+                            <li className="nav-item">
+                                <Link class="nav-link" to="/productos/Formal hombre">Formal hombre</Link>
+                            </li>
+                            
+                            <li className="nav-item">
+                                <Link class="nav-link" to="/productos/Formal mujer">Formal mujer</Link>
+                            </li>
                         </ul>
                     </div>
                     <CartWidget />
