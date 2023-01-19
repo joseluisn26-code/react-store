@@ -4,6 +4,9 @@ import { pedirDatos } from "../../helpers/pedirDatos"
 import Aside from "../Aside/Aside"
 import ItemList from "../ItemList/ItemList"
 import './ItemListContainer.css'
+import { collection, getDocs, query, where } from "firebase/firestore"
+import { db } from "../../firebase/config"
+
 
 import { useParams } from "react-router-dom"
 
@@ -40,17 +43,18 @@ const ItemListContainer = ({ greeting = "Bienvenido a nuestra tienda donde encon
     })
 
     useEffect(() => {
-        pedirDatos()
-            .then((res) => {
-                if (categoryId) {
-                    setProductos( res.filter(prod => prod.categoria === categoryId) )
-                } else {
-                    setProductos(res)
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        const productosRef = collection(db, "productos")
+        const q = categoryId ? query(productosRef, where("categoria", "==", categoryId) ) : productosRef
+        getDocs(q)
+            .then((resp) => {
+
+                setProductos( resp.docs.map((doc) => {
+                    return { 
+                        ...doc.data(),
+                        id: doc.id
+                    }
+            }))
+        })
     }, [categoryId])
 
     return (
