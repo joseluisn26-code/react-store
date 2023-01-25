@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom"
+import { useCartContext } from "../../context/CartContext"
+import ItemCount from "../ItemCount/ItemCount"
 
 const ItemDetail = ({
   id,
@@ -14,6 +16,7 @@ const ItemDetail = ({
   precio,
   stock,
 }) => {
+  const { agregarAlCarrito, isInCart } = useCartContext()
   const [cantidad, setCantidad] = useState(1)
 
   const navigate = useNavigate()
@@ -21,6 +24,24 @@ const ItemDetail = ({
   const handleVolver = () => {
     navigate(-1)
   }
+  
+  const handleAgregar = () => {
+    const item = {
+        id,
+        titulo,
+        marca,
+        categoria,
+        referencia,
+        genero,
+        color,
+        imagen,
+        descripcion,
+        precio,
+        stock,
+        cantidad
+    }
+    agregarAlCarrito(item)
+}
 
   return (
     <div className="card w-50 p-3 mx-auto d-block">
@@ -35,6 +56,16 @@ const ItemDetail = ({
         <h6 className="card-text">{descripcion}</h6>
         <h6 className="card-text">Disponibilidad de Stock:{stock}</h6>
         <h5 className="card-text">Precio: ${precio}</h5>
+        {
+          !isInCart(id)
+          ? <ItemCount 
+                  cantidad={cantidad}
+                  setCantidad={setCantidad}
+                  max={stock}
+                  onAdd={handleAgregar}
+              />
+              : <Link to="/cart" className="btn btn-success">Terminar mi compra</Link>    
+        }
       </div>
 
       <div class="card-footer text-center">

@@ -4,9 +4,17 @@
     position: relative;
     cursor: pointer;
     text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease-in-out all;
 }
 
 .cart-widget:hover {
     font-size: 24px;
+}
+
+.cart-widget-active {
+    visibility: visible;
+    opacity: 1;
 }
 
