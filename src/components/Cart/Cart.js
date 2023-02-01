@@ -1,15 +1,30 @@
 import { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
 import { FaTrashAlt } from 'react-icons/fa'
+import { Link } from "react-router-dom"
 
 const Cart = () => {
   const { cart, emptycart, totalCart, removerItem, checkout } = useContext(CartContext)
+
+  if (cart.length === 0) {
+    return (
+        <div className="card w-50 my-5 p-3 mx-auto d-block">
+            <h2 className="card-header text-center">Tu carrito está vacío</h2>
+            <div className="card-body">
+              <p className="card-text">Regresa cuando tengas algun producto agregado</p>
+            </div>
+            <div class="card-footer text-center">
+              <Link to="/" className="btn btn-primary">Volver</Link>
+            </div>
+        </div>
+    )
+}
 
   return (
     <div className="container">
       <div class="card w-50 my-5 p-3 mx-auto d-block">
         <h2>Tu compra</h2>
-        <hr />
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"></div>
 
         {cart.map((item) => (
           <div key={item.id}>
@@ -32,7 +47,7 @@ const Cart = () => {
             >
               <FaTrashAlt />
             </button>
-            <hr />
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"></div>
           </div>
         ))}
 
